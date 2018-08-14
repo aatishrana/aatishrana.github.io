@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Theory on Aatish Rana</title>
+    <link>/categories/theory.html</link>
+    <description>Recent content in Theory on Aatish Rana</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2018, Aatish Rana and the Hugo Authors; all rights reserved.</copyright>
+    <lastBuildDate>Fri, 03 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dependency Injection</title>
+      <link>/post/dependency-injection.html</link>
+      <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/dependency-injection.html</guid>
+      <description>Dependency Injection, What, Why and How So you have heard of D.I everywhere. You have tried understanding it, but you need a simple explanation.
+Let&amp;rsquo;s understand Dependency Injection in as little time n effort as possible.
+&amp;lsquo;Dependency&amp;rsquo; as it&amp;rsquo;s name suggest is just telling us that something can not work unless it has that other thing. Now these &amp;lsquo;things&amp;rsquo; can be a Class or a Method or even a Package.</description>
+    </item>
+    
+  </channel>
+</rss>

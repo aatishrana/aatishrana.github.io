@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+
+    <title>Dependency Injection -- Aatish Rana</title>
+
+    
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Aatish Rana</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../post/goisforlovers.html">(Hu)go Template Primer</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../about.html">About Hugo</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../post/dependency-injection.html">Dependency Injection</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../post/hugoisforlovers.html">Getting Started with Hugo</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">tutorials</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('../img/post-bg.jpg')">
+    
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Dependency Injection</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">
+                 
+Posted by <a href="#"></a> on Fri, Nov 3, 2017
+<br />
+In <a href="../categories/theory">Theory</a>, <a href="../categories/java">Java</a>
+
+<br />
+Tags <a href="../tags/di">di</a>, <a href="../tags/java">java</a>
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<h1 id="dependency-injection-what-why-and-how">Dependency Injection, What, Why and How</h1>
+
+<p>So you have heard of D.I everywhere. You have tried understanding it, but you need a simple explanation.</p>
+
+<p>Let&rsquo;s understand Dependency Injection in as little time n effort as possible.</p>
+
+<p>&lsquo;<strong>Dependency</strong>&rsquo; as it&rsquo;s name suggest is just telling us that something can not work unless it has that other thing. Now these &lsquo;things&rsquo; can be a Class or a Method or even a Package.</p>
+
+<p>The point is if A is dependent on B, A can not work unless B is provided to it.</p>
+
+<p>Let&rsquo;s see a code example.</p>
+
+<pre><code class="language-java">import Engine;
+class Car{
+    Engine engine;
+    Car(){
+        this.engine = new Engine();
+    }
+    void moveForward(){
+        this.engine.accelerate();
+        ....
+    }
+}
+</code></pre>
+
+<p>In the above example, in order to use Car&rsquo;s moveForward method, Engine must be created first.</p>
+
+<p><br/></p>
+
+<p>&lsquo;<strong>Dependency Injection</strong>&rsquo; means that our dependencies should be given to us from outside when we need it.</p>
+
+<p>example</p>
+
+<pre><code class="language-java">import Engine;
+class Car{
+    Engine engine;
+    Car(Engine engine){
+        this.engine = engine;
+    }
+    void moveForward(){
+        this.engine.accelerate();
+        ....
+    }
+}
+</code></pre>
+
+<p>Unlike the first example, in this example rather than creating class Engine&rsquo;s instance our self, we are given an instance through the  constructor.</p>
+
+<h3 id="that-s-it">That&rsquo;s it</h3>
+
+<p>In essence, the concept is that simple, like Hollywood Principle</p>
+
+<blockquote>
+<p><em>Don&rsquo;t call us, we&rsquo;ll call you</em></p>
+
+<p><em>Don&rsquo;t call around for your dependencies, we&rsquo;ll give them to you whenever you need them</em></p>
+</blockquote>
+
+<p><br/><br/><br/></p>
+
+<h3 id="wanna-dive-deep">Wanna dive deep?</h3>
+
+<p>so what is the point of doing this? why can&rsquo;t we simply create instances of our dependencies?</p>
+
+<p>there are many reasons but the biggest one is</p>
+
+<p><strong>Loose Coupling</strong></p>
+
+<p><em>A software which is loosely coupled is considered a good software, because it is reusable,
+testable and extensible.</em></p>
+
+<p><br/></p>
+
+<p>So how does D.I make loose coupling.</p>
+
+<p><strong>If we inject our dependencies, we can easily change what we are injecting. daaah!</strong></p>
+
+<p>So now we can easily create our classes and later decide if they are suppose to be used together.</p>
+
+<p>let&rsquo;s see another example</p>
+
+<pre><code class="language-java">import Engine;
+class Car{
+    Engine engine;
+    Car(Engine engine){
+        this.engine = engine;
+    }
+    void moveForward(){
+        this.engine.accelerate();
+        ....
+    }
+}
+</code></pre>
+
+<pre><code class="language-java">import Engine;
+class Truck{
+    Engine engine;
+    Truck(Engine engine){
+        this.engine = engine;
+    }
+    void moveForward(){
+        this.engine.accelerate();
+        ....
+    }
+}
+
+</code></pre>
+
+<p>In the above example, we are reusing our Engine class for both Car and Truck. We could have very easily created new instances of the engine inside our constructor, but imagine if object creation code of Engine class was changed.</p>
+
+<p>from this:</p>
+
+<pre><code class="language-java">Car(){
+    this.engine = new Engine();
+}
+</code></pre>
+
+<p>to this:</p>
+
+<pre><code class="language-java">Car(){
+    this.engine = new Engine(turboCharge, nitrousOxide);
+}
+</code></pre>
+
+<p>Not only do we have to change our code in Car and Truck class, but anywhere else where Engine class is used. We now also have to create and manage these small objects
++ turboCharge
++ nitrousOxide</p>
+
+<p><em>where will they be created?</em></p>
+
+<p><em>should they be private fields of Car?</em></p>
+
+<p><em>what if they themselves need objects while creation?</em></p>
+
+<p><br/></p>
+
+<p>A better approach is to let Car class be responsible only for its own functionality rather than the responsibility of creating an Engine.</p>
+
+<p>Injecting would also help us test our Car class</p>
+
+<pre><code class="language-java">Car(Engine fakeEngine){
+    this.engine = fakeEngine;
+}
+</code></pre>
+
+<pre><code class="language-java">car.setPosition(0, 0);
+car.moveForward();
+assertEquals(10, car.getPositionX());
+</code></pre>
+
+<p>we don&rsquo;t need a real Engine to test our Car class, we can easily pass a fake engine and write test cases for our Car class&rsquo;s methods.</p>
+
+<p><br/></p>
+
+<h4 id="adding-abstraction">Adding Abstraction</h4>
+
+<p>We can go one step further by using abstract types instead of concrete types and make our classes more extensible.</p>
+
+<p>let&rsquo;s say instead of a concrete class Engine, we have an abstract Engine</p>
+
+<pre><code class="language-java">interface Engine{
+    void turnOn();
+    void turnOff();
+    ...
+}
+</code></pre>
+
+<p>And some of its concrete implementation</p>
+
+<pre><code class="language-java">class PetrolEngine implements Engine{
+    void turnOn(){
+        this.useSparkPlug();
+        ...
+    }
+    void turnOff(){
+        ...
+    }
+}
+</code></pre>
+
+<pre><code class="language-java">class DieselEngine implements Engine{
+    void turnOn(){
+        this.useFuelInjector();
+        ...
+    }
+    void turnOff(){
+        ...
+    }
+}
+</code></pre>
+
+<p>Then we can use our abstract engine in our Car class</p>
+
+<pre><code class="language-java">import Engine;
+class Car{
+    Engine engine;
+    Car(Engine engine){
+        this.engine = engine;
+    }
+    void moveForward(){
+        this.engine.accelerate();
+        ....
+    }
+}
+</code></pre>
+
+<p>But which real implementation of the engine will be used in Car, will be decided when we create our Car and run our program</p>
+
+<pre><code class="language-java">class App{
+    public static void main(String[] args){
+        Car carOne = new Car(new PetolEngine());
+        carOne.moveForward();
+        
+        Car carTwo = new Car(new DieselEngine());
+        carTwo.moveForward();
+    }
+}
+</code></pre>
+
+<p>we can do this in Truck class and all other classes which uses Engine.
+In future, if we create a new type of engine &ldquo;SolarEngine&rdquo; we can easily swap it without worrying about changes in any of our Vehicle classes.</p>
+
+<p><br/></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><strong>What is Dependency Injection</strong>
++ Don&rsquo;t call around for your dependencies, we&rsquo;ll give them to you whenever you need them</p>
+
+<p><strong>Why use Dependency Injection</strong>
++ To write loosely coupled code</p>
+
+<p><strong>How to use Dependency Injection</strong>
++ Pass dependencies through constructor, setter methods or directly to public fields.</p>
+
+<p><br/><br/></p>
+
+<h2 id="p-s">P.S.</h2>
+
+<p>With dependency injection our implementation code is a lot clean and easy, however, we have polluted our calling code</p>
+
+<pre><code class="language-java">class App{
+    public static void main(String[] args){
+        NitrousOxide nitro = new NitrousOxide();
+        TurboCharge turboCharge = new TurboCharge();
+        Engine engine = new SuperEngine(turboCharge, nitro);
+        Car car = new Car(engine);
+        car.moveForward();
+    }
+}
+</code></pre>
+
+<p>This has created a lot of boilerplate code, which doesn&rsquo;t do anything but waste a lot of developer&rsquo;s time. This boilerplate also has to be created in right order otherwise it won&rsquo;t work. This can easily become very complex and hard to maintain if we are working on a large project.</p>
+
+<p>To avoid this, we can use a D.I library, which we will discuss in future posts.</p>
+
+                  
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © 2018, Aatish Rana and the Hugo Authors; all rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/clean-blog.js"></script>
+
+    
+
+</body>
+
+</html>
+
