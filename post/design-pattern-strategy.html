@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+
+    <title>Design Pattern Strategy -- Aatish Rana</title>
+
+    
+
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Aatish Rana</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../about.html">About Hugo</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('../img/post-bg.jpg')">
+    
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Design Pattern Strategy</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">
+                 
+  A 20 minute read,
+
+Posted by <a href="#">Aatish Rana</a> on Sat, Nov 18, 2017
+<br />
+In <a href="../categories/java">Java</a>, <a href="../categories/theory">Theory</a>, <a href="../categories/pattern">Pattern</a>
+
+<br />
+Tags <a href="../tags/java">java</a>
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<h1 id="design-patterns-strategy">Design Patterns - Strategy</h1>
+
+<p>In the strategy pattern, the method of a class is defined as a separate interface and concrete implementation of that interface is used depending on our need. This allows better decoupling between the method and the class that uses the method.</p>
+
+<p>If you don&rsquo;t know what Polymorphism is I would encourage you to go through that first.</p>
+
+<p><br></p>
+
+<h3 id="done">Done?</h3>
+
+<p>I will assume you know what polymorphism is from now on.</p>
+
+<p>So in polymorphism or more specifically (subtype/inclusion) polymorphism our compiler allow us to write a method that takes a class T in its argument, but will also work correctly if passed a subclass of T</p>
+
+<p>example:</p>
+
+<pre><code class="language-java">public class Application{
+  public static void main(String[] args){
+    describeAnimal(new Lion());
+    describeAnimal(new Duck());
+  }
+  
+  public static void describeAnimal(Animal animal){
+    animal.walk();
+    animal.eat();
+    animal.fly();
+  }
+}
+</code></pre>
+
+<p>The method describeAnimal takes 1 argument of type Animal but it will work correctly even when passed an argument of Animal&rsquo;s subtype (Lion, Duck, etc).</p>
+
+<pre><code class="language-java">public interface Animal{
+  void walk();
+  void eat();
+  void fly();
+}
+</code></pre>
+
+<pre><code class="language-java">public class Lion implements Animal{
+ 
+  @Override
+  public void walk(){
+    // code of animal walking on 4 legs
+  }
+  
+  @Override
+  public void eat(){
+    // code of animal eating and processing meat
+  }
+
+  @Override
+  public void fly(){
+    // this animal can't fly, handle that
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">public class Duck implements Animal{
+ 
+  @Override
+  public void walk(){
+    // code of animal walking on 2 legs
+  }
+  
+  @Override
+  public void eat(){
+    // code of animal eating bread crumbs
+  }
+
+  @Override
+  public void fly(){
+    // code of animal flying at low altitude
+  }
+}
+</code></pre>
+
+<p>Now this polymorphic behavior of animal looks good but in large applications where we add more and more types of animals, because they have different types of behaviors(strategies) on how to walk, eat, fly and so on, things can go out of hands very quickly.</p>
+
+<p>Currently, these 2 types have completely different strategies of all 3 methods but if we add more types of animals, many of them would have all or some similarities.</p>
+
+<p>example:</p>
+
+<pre><code class="language-java">public class Monkey implements Animal{
+ 
+  @Override
+  public void walk(){
+    // code of animal walking on 2 legs
+  }
+  
+  @Override
+  public void eat(){
+    // code of animal eating banana
+  }
+
+  @Override
+  public void fly(){
+    // can not fly
+  }
+}
+</code></pre>
+
+<p>now monkey walks on 2 legs just like duck however it doesn&rsquo;t fly like the lion and at the same time, it is also vegetarian like the duck.</p>
+
+<p>we can add more animals, like Dragon which can eat meat, fly high and walk on 2 legs.
+or add Chimpanzee which eats a banana, cannot fly and walk on 2 legs exactly same as Monkey.</p>
+
+<p>Moreover, as we add more behavior to our animal class(swim, makeSound, etc), there are going be more combinations of behaviors.</p>
+
+<p>Naive programmers might start copy-pasting code of similar behavior in each type, or worse they might create a superclass with common behavior and start extending from them until they get stuck with maximum single inheritance feature of almost every major object-oriented language (Java, c# etc)</p>
+
+<p>example</p>
+
+<p>creating base classes for reuse</p>
+
+<pre><code class="language-java">public class WalkingOnTwoFeet{
+  void walk(){
+    // code of animal walking on 2 legs
+  }
+}
+public class Vegetarian{
+  void eat(){
+    // code of animal eating veg food
+  }
+}
+public class NonFlyer{
+  void fly(){
+    // empty
+  }
+}
+</code></pre>
+
+<p>not able to use them</p>
+
+<pre><code class="language-java">public class Monkey extends WalkingOnTwoFeet implements Animal{
+ 
+  @Override
+  public void walk(){
+    super.walk();
+  }
+  
+  @Override
+  public void eat(){
+    // can not extend Vegetarian
+  }
+
+  @Override
+  public void fly(){
+    // can not extend NonFlyer
+  }
+}
+</code></pre>
+
+<p><br></p>
+
+<h3 id="in-strategy-pattern-we-take-our-behavior-walking-eating-flying-and-define-them-in-separate-concrete-classes-and-use-them-via-an-abstract-interface">In strategy pattern, we take our behavior(walking, eating, flying) and define them in separate concrete classes and use them via an abstract interface.</h3>
+
+<p>First, we create interfaces for each of our behavior</p>
+
+<pre><code class="language-java">public interface WalkingStrategy{
+  void walk();
+}
+public interface EatingStrategy{
+  void eat();
+}
+public interface FlyingStrategy{
+  void fly();
+}
+</code></pre>
+
+<p>And then their concrete implementations depending on our needs.</p>
+
+<p><br></p>
+
+<p>For walking:</p>
+
+<pre><code class="language-java">public class WalkingOnTwoFeet implements WalkingStrategy{
+  void walk(){
+    // code of animal walking on 2 legs
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">public class WalkingOnFourFeet implements WalkingStrategy{
+  void walk(){
+    // code of animal walking on 4 legs
+  }
+}
+</code></pre>
+
+<p><br></p>
+
+<p>For eating:</p>
+
+<pre><code class="language-java">public class Vegetarian implements EatingStrategy{
+  void eat(){
+    // code of animal eating veg food
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">public class NonVegetarian implements EatingStrategy{
+  void eat(){
+    // code of animal eating non veg food
+  }
+}
+</code></pre>
+
+<p><br></p>
+
+<p>For flying:</p>
+
+<pre><code class="language-java">public class NonFlyer implements FlyingStrategy{
+  void fly(){
+    // empty
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">public class LowFlyer implements FlyingStrategy{
+  void fly(){
+    // code of animal flying at low altitude
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">public class HighFlyer implements FlyingStrategy{
+  void fly(){
+    // code of animal flying at high altitude
+  }
+}
+</code></pre>
+
+<p><br></p>
+
+<p>So now our animals would use these strategies depending on its type</p>
+
+<pre><code class="language-java">import WalkingOnFourFeet;
+import NonVegetarian;
+import NonFlyer;
+
+public class Lion implements Animal{
+ 
+  @Override
+  public void walk(){
+    new WalkingOnFourFeet().walk();
+  }
+  
+  @Override
+  public void eat(){
+    new NonVegetarian().eat();
+  }
+
+  @Override
+  public void fly(){
+    new NonFlyer().fly();
+  }
+}
+</code></pre>
+
+<p>now this example of Lion is <strong>very bad</strong> and must not be used in production code(or anywhere for that matter).</p>
+
+<p>As you can see the concrete implementations of each of our strategies are created inside Lion class, so we have to import them. Which means every time we want to use a new strategy for lion we have to change code inside Lion then recompile and redeploy Lion along with our new strategy.</p>
+
+<p><strong>Instead, we should use our abstract interfaces of strategies and inject concrete implementations through constructor injection.</strong></p>
+
+<p>If you don&rsquo;t know what Dependency Injection is and it&rsquo;s benefits go through it from <a href="http://aatishrana.com/blog/dependency-injection">here</a></p>
+
+<p><br></p>
+
+<p>So a better version of Lion would be</p>
+
+<pre><code class="language-java">import WalkingStrategy;
+import EatingStrategy;
+import FlyingStrategy;
+
+public class Lion implements Animal{
+ 
+  private WalkingStrategy walkingStrategy;
+  private EatingStrategy eatingStrategy;
+  private FlyingStrategy flyingStrategy;
+  
+  public Lion(WalkingStrategy walkingStrategy,
+              EatingStrategy eatingStrategy,
+              FlyingStrategy flyingStrategy){
+    this.walkingStrategy = walkingStrategy;
+    this.eatingStrategy = eatingStrategy;
+    this.flyingStrategy = flyingStrategy;
+  }
+  
+  @Override
+  public void walk(){
+    this.walkingStrategy.walk();
+  }
+  
+  @Override
+  public void eat(){
+    this.eatingStrategy.eat();
+  }
+
+  @Override
+  public void fly(){
+    this.flyingStrategy.fly();
+  }
+}
+</code></pre>
+
+<p>And when we need to create a Lion</p>
+
+<pre><code class="language-java">public class Application{
+  public static void main(String[] args){
+    WalkingStrategy fourFeet = new WalkingOnFourFeet();
+    EatingStrategy nonVeg = new NonVegetarian();
+    FlyingStrategy noFly = new NonFlyer();
+    
+    Animal lion = new Lion(fourFeet, nonVeg, noFly);
+  }
+}
+</code></pre>
+
+<p><br></p>
+
+<p>Same for other types of animals</p>
+
+<pre><code class="language-java">import WalkingStrategy;
+import EatingStrategy;
+import FlyingStrategy;
+
+public class Duck implements Animal{
+ 
+  private WalkingStrategy walkingStrategy;
+  private EatingStrategy eatingStrategy;
+  private FlyingStrategy flyingStrategy;
+  
+  public Duck(WalkingStrategy walkingStrategy,
+              EatingStrategy eatingStrategy,
+              FlyingStrategy flyingStrategy){
+    this.walkingStrategy = walkingStrategy;
+    this.eatingStrategy = eatingStrategy;
+    this.flyingStrategy = flyingStrategy;
+  }
+  
+  @Override
+  public void walk(){
+    this.walkingStrategy.walk();
+  }
+  
+  @Override
+  public void eat(){
+    this.eatingStrategy.eat();
+  }
+
+  @Override
+  public void fly(){
+    this.flyingStrategy.fly();
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">public class Application{
+  public static void main(String[] args){
+    WalkingStrategy twoFeet = new WalkingOnTwoFeet();
+    EatingStrategy veg = new Vegetarian();
+    FlyingStrategy lowFly = new LowFlyer();
+    
+    Animal duck = new Duck(twoFeet, veg, lowFly);
+  }
+}
+</code></pre>
+
+<h4 id="that-is-it-that-s-the-strategy-pattern">That is it. That&rsquo;s the strategy pattern</h4>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>In the strategy pattern, the method(<em>walk, eat, fly</em>) of a class(<em>Animal</em>) is defined as a separate interface(<em>EatingStrategy</em>) and concrete implementation(<em>Vegetarian</em>) of that interface is used depending on our need.</p>
+
+<p><br></p>
+
+<h4 id="ps">Ps.</h4>
+
+<p>In cases where there are no other methods and properties for Lion except for these strategies which are being injected, we don&rsquo;t even need a separate class &ldquo;Lion&rdquo; to represent it, we can just create an AnimalFactory class and it can have a method which is responsible for creating the right Lion type for us using just the Animal interface.</p>
+
+<p>That&rsquo;s <strong>Simple Factory</strong>, a topic we can discuss <a href="http://aatishrana.com/blog/design-patterns-factory">here</a>.</p>
+
+                  
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © 2018, Aatish Rana and the Hugo Authors; all rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="../js/jquery.min.js"></script>
+
+    
+    <script src="../js/bootstrap.min.js"></script>
+
+    
+    <script src="../js/clean-blog.js"></script>
+
+    
+
+</body>
+
+</html>
+

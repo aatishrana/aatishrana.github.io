@@ -11,36 +11,27 @@
     
     
     <item>
-      <title>Development</title>
-      <link>/categories/development.html</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/development.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>/categories/golang.html</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/golang.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Java</title>
       <link>/categories/java.html</link>
-      <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/java.html</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Pattern</title>
+      <link>/categories/pattern.html</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/pattern.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Theory</title>
       <link>/categories/theory.html</link>
-      <pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/theory.html</guid>
       <description></description>

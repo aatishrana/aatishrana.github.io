@@ -6,30 +6,60 @@
     <description>Recent content on Aatish Rana</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2018, Aatish Rana and the Hugo Authors; all rights reserved.</copyright>
-    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Nov 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Creating a New Theme</title>
-      <link>/post/creating-a-new-theme.html</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <title>Design Pattern Abstract Factory</title>
+      <link>/post/design-pattern-abstract-factory.html</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/creating-a-new-theme.html</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
-We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+      <guid>/post/design-pattern-abstract-factory.html</guid>
+      <description>Design Pattern - Abstract Factory The abstract factory pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+If you don’t know what Factory Pattern is, I would encourage you to go through that first.
+Done? I will assume you know what factory pattern is from now on.
+
+The abstract factory and factory method are similar to each other, the only difference however is</description>
     </item>
     
     <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>/post/migrate-from-jekyll.html</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      <title>Design Pattern Factory</title>
+      <link>/post/design-pattern-factory.html</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/migrate-from-jekyll.html</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+      <guid>/post/design-pattern-factory.html</guid>
+      <description>Design Pattern - Factory Method The factory method pattern defines an interface for creating an object but lets subclasses decide which class to instantiate. Factory method let the class defer instantiation to subclasses.
+
+If you don’t know what Dependency Injection is, I would encourage you to go through that first.
+Done? I will assume you know what dependency injection is from now on.
+
+In every software system, there are 2 type of code * Code which does something cool * Code which glue together the cool code</description>
+    </item>
+    
+    <item>
+      <title>Design Pattern Decorator</title>
+      <link>/post/design-pattern-decorator.html</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/design-pattern-decorator.html</guid>
+      <description>Design Pattern - Decorator The decorator pattern attaches additional responsibility to an object dynamically.
+Let&amp;rsquo;s say we need to create a restaurant menu, where we are going to prepare and serve different types of dishes. We also need to bill the customer as per the cost of each item.
+public class Pizza{ void prepare(){ // preparation code } String description(){ return &amp;quot;pizza&amp;quot;; } int cost(){ return 50; } }  public class Burger{ void prepare(){ // preparation code } String desc(){ return &amp;quot;burger&amp;quot;; } int price(){ return 47; } }  Just like the class Pizza and Burger, we would have to create a lot of other food item classes and then we can possibly use them like this</description>
+    </item>
+    
+    <item>
+      <title>Design Pattern Strategy</title>
+      <link>/post/design-pattern-strategy.html</link>
+      <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/design-pattern-strategy.html</guid>
+      <description>Design Patterns - Strategy In the strategy pattern, the method of a class is defined as a separate interface and concrete implementation of that interface is used depending on our need. This allows better decoupling between the method and the class that uses the method.
+If you don&amp;rsquo;t know what Polymorphism is I would encourage you to go through that first.
+
+Done? I will assume you know what polymorphism is from now on.</description>
     </item>
     
     <item>
@@ -52,30 +82,6 @@ Let&amp;rsquo;s understand Dependency Injection in as little time n effort as po
       <description>Hugo is the world’s fastest framework for building websites. It is written in Go.
 It makes use of a variety of open source projects including:
  https://github.com/russross/blackfriday https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper  Learn more and contribute on GitHub.</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>/post/goisforlovers.html</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/post/goisforlovers.html</guid>
-      <description>Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.
-This document is a brief primer on using Go templates.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Hugo</title>
-      <link>/post/hugoisforlovers.html</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/post/hugoisforlovers.html</guid>
-      <description>Step 1. Install Hugo Go to Hugo releases and download the appropriate version for your OS and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at Install Hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
     </item>
     
   </channel>
